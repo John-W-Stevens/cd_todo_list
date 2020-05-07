@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import "./bootstrap.css";
 
@@ -7,6 +7,19 @@ import Element from "./components/Element"
 
 function App() {
   const [elements, setElements] = useState([])
+
+  // DATA PERSISTENCE IN LOCAL STORAGE: //  
+  useEffect(()=>{
+    const data = localStorage.getItem("todo-list");
+    if (data){
+      setElements(JSON.parse(data))
+    }
+  }, []);
+
+  useEffect(()=> {
+    localStorage.setItem("todo-list", JSON.stringify(elements))
+  });
+  // DATA PERSISTENCE IN LOCAL STORAGE: //
 
   return (
     <div className="App container">
