@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import "./bootstrap.css";
+
+import AddElementForm from "./components/addElementForm"
+import Element from "./components/Element"
 
 function App() {
+  const [elements, setElements] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+      <AddElementForm elements = { elements } setElements = { setElements }/>
+      
+      {elements.map( (element, i) => (
+        <Element key={ i } element={ element } elements={ elements } setElements={ setElements } index={ i } />
+      ))}
+
     </div>
   );
 }
